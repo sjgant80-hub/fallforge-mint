@@ -1,0 +1,17 @@
+{
+  "name": "support-triage-train-v1",
+  "note": "TRAIN examples for the limb to distil a spec from. Fully disjoint from the held-out eval set (support-triage-eval.json) — the limb never sees the eval probes.",
+  "task": "Read a customer support message. Reply with ONLY a JSON object: {\"category\": one of refund|shipping|account|bug|other, \"urgency\": one of low|medium|high, \"order\": the order number as a string or \"none\"}. No prose.",
+  "examples": [
+    { "input": "This blender caught fire on first use!! Order 7734. I want a refund TODAY and I'm reporting you to trading standards.", "output": "{\"category\":\"refund\",\"urgency\":\"high\",\"order\":\"7734\"}" },
+    { "input": "hi, when will my parcel arrive? order number 210. no hurry x", "output": "{\"category\":\"shipping\",\"urgency\":\"low\",\"order\":\"210\"}" },
+    { "input": "Two-factor codes stopped coming through and I present to the board in an hour. Please help NOW.", "output": "{\"category\":\"account\",\"urgency\":\"high\",\"order\":\"none\"}" },
+    { "input": "Minor thing — the dark mode toggle resets every time I refresh. Whenever you get a sec.", "output": "{\"category\":\"bug\",\"urgency\":\"low\",\"order\":\"none\"}" },
+    { "input": "Item from order 4520 arrived but it's the wrong colour. Not fussed about speed, just want it swapped or refunded.", "output": "{\"category\":\"refund\",\"urgency\":\"medium\",\"order\":\"4520\"}" },
+    { "input": "What are your opening hours over the bank holiday?", "output": "{\"category\":\"other\",\"urgency\":\"low\",\"order\":\"none\"}" },
+    { "input": "Tracking for order 66 hasn't moved in 9 days and it's a birthday present for Saturday. Getting worried.", "output": "{\"category\":\"shipping\",\"urgency\":\"medium\",\"order\":\"66\"}" },
+    { "input": "Your invoice download gives a 500 error and my accountant needs it for the VAT deadline tomorrow.", "output": "{\"category\":\"bug\",\"urgency\":\"high\",\"order\":\"none\"}" },
+    { "input": "Please close my account and delete my data. No rush, just confirm when done.", "output": "{\"category\":\"account\",\"urgency\":\"low\",\"order\":\"none\"}" },
+    { "input": "Order 88 — box was empty when it arrived?! Where is my stuff?", "output": "{\"category\":\"shipping\",\"urgency\":\"high\",\"order\":\"88\"}" }
+  ]
+}

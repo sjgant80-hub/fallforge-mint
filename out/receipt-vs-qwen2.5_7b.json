@@ -1,0 +1,25 @@
+{
+  "v": 1,
+  "kind": "fallforge-gate-receipt",
+  "task": "support-triage-v1",
+  "probes": 16,
+  "candidate": {
+    "model": "triage-1b",
+    "passed": 14,
+    "passRate": 0.875,
+    "meanMs": 3246
+  },
+  "baseline": {
+    "model": "qwen2.5:7b",
+    "passed": 15,
+    "passRate": 0.9375,
+    "meanMs": 8151
+  },
+  "passDelta": -0.0625,
+  "speedX": 2.51,
+  "verdict": "LOSES",
+  "certified": false,
+  "scoredAt": "2026-09-14T21:06:27.643Z",
+  "scope": "this probe set only — a receipt is a measurement, never a general claim",
+  "hash": "01dae9c907bda058d2c75acf5ff05b4ff70b1a6f9f6e804794ad3ada852f5b37"
+}

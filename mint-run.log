@@ -1,0 +1,16 @@
+FallForge Mint · node=triage-1b base=llama3.2:1b limb=qwen2.5:14b rounds<=3
+  train 10 examples (hash ce3065cf1e1c…) · eval 16 probes HELD OUT
+  measuring the raw base first…
+  llama3.2:1b: 1/16     llama3.2:1b: 2/16     llama3.2:1b: 3/16     llama3.2:1b: 4/16     llama3.2:1b: 5/16     llama3.2:1b: 6/16     llama3.2:1b: 7/16     llama3.2:1b: 8/16     llama3.2:1b: 9/16     llama3.2:1b: 10/16     llama3.2:1b: 11/16     llama3.2:1b: 12/16     llama3.2:1b: 13/16     llama3.2:1b: 14/16     llama3.2:1b: 15/16     llama3.2:1b: 16/16   
+ROUND 1: limb writing spec…
+  minted triage-1b (1350 byte Modelfile) — gating vs raw base…
+  triage-1b: 1/16     triage-1b: 2/16     triage-1b: 3/16     triage-1b: 4/16     triage-1b: 5/16     triage-1b: 6/16     triage-1b: 7/16     triage-1b: 8/16     triage-1b: 9/16     triage-1b: 10/16     triage-1b: 11/16     triage-1b: 12/16     triage-1b: 13/16     triage-1b: 14/16     triage-1b: 15/16     triage-1b: 16/16   
+  round 1: 14/16 vs base 11/16 → BEATS (certified)
+stretch receipt: triage-1b vs qwen2.5:7b…
+  qwen2.5:7b: 1/16     qwen2.5:7b: 2/16     qwen2.5:7b: 3/16     qwen2.5:7b: 4/16     qwen2.5:7b: 5/16     qwen2.5:7b: 6/16     qwen2.5:7b: 7/16     qwen2.5:7b: 8/16     qwen2.5:7b: 9/16     qwen2.5:7b: 10/16     qwen2.5:7b: 11/16     qwen2.5:7b: 12/16     qwen2.5:7b: 13/16     qwen2.5:7b: 14/16     qwen2.5:7b: 15/16     qwen2.5:7b: 16/16   
+  stretch: 14/16 vs qwen2.5:7b 15/16 → LOSES
+  new issuer key generated at C:\Users\sjgan\.fallforge\ed25519.pem (private — never committed)
+
+MINTED ✓ triage-1b — certified BEATS — the mint measurably improved the base
+  14/16 vs raw base 11/16 · delta +19%
+  out/: Modelfile, spec.json, receipt-vs-base.json, manifest.json (signed Ed25519)

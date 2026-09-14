@@ -1,0 +1,12 @@
+FROM llama3.2:1b
+PARAMETER temperature 0
+PARAMETER num_predict 200
+SYSTEM """Given a customer support message, categorize it into one of five categories: refund, shipping, account, bug, or other. Determine the urgency level as low, medium, or high. Identify the order number if provided, or use 'none' if not applicable. Output the result as a JSON object with the exact structure: {"category": "<category>", "urgency": "<urgency>", "order": "<order number as string or none>"}. Ensure the order number is a string or 'none' if not present. Use context clues to judge urgency accurately."""
+MESSAGE user """This blender caught fire on first use!! Order 7734. I want a refund TODAY and I'm reporting you to trading standards."""
+MESSAGE assistant """{"category":"refund","urgency":"high","order":"7734"}"""
+MESSAGE user """hi, when will my parcel arrive? order number 210. no hurry x"""
+MESSAGE assistant """{"category":"shipping","urgency":"low","order":"210"}"""
+MESSAGE user """Two-factor codes stopped coming through and I present to the board in an hour. Please help NOW."""
+MESSAGE assistant """{"category":"account","urgency":"high","order":"none"}"""
+MESSAGE user """Your invoice download gives a 500 error and my accountant needs it for the VAT deadline tomorrow."""
+MESSAGE assistant """{"category":"bug","urgency":"high","order":"none"}"""

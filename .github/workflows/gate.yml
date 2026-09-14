@@ -1,0 +1,38 @@
+name: gate
+on: [push, pull_request]
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: tests
+        run: node --test kernel.test.mjs
+      - name: mutation gate — kernel.mjs must be CLEAN
+        run: |
+          node tools/witness.mjs mutate kernel.mjs --timeout 30000 --cap 500 --test node --test kernel.test.mjs | tee gate.out || true
+          node -e "const b=require('fs').readFileSync('gate.out','utf8');const j=JSON.parse(b.slice(b.indexOf('{'),b.lastIndexOf('}')+1));if(j.clean!==true){console.error('GATE NOT CLEAN');process.exit(1)}console.log('CLEAN '+j.killed+'/'+j.total)"
+      - name: the shipped manifest must verify — hash, Ed25519 signature, and receipt hashes
+        run: |
+          node -e "
+          const fs = require('fs');
+          const { createPublicKey, verify } = require('crypto');
+          import('./kernel.mjs').then((k) => {
+            const m = JSON.parse(fs.readFileSync('out/manifest.json', 'utf8'));
+            const vm = k.verifyManifest(m);
+            if (!vm.ok || vm.valid !== true) { console.error('MANIFEST INVALID: ' + vm.why); process.exit(1); }
+            const s = k.signable(m);
+            const pub = createPublicKey({ key: Buffer.from(m.signature.pub, 'hex'), format: 'der', type: 'spki' });
+            if (!verify(null, Buffer.from(s.payload, 'utf8'), pub, Buffer.from(m.signature.sig, 'hex'))) { console.error('SIGNATURE FAILS'); process.exit(1); }
+            const rec = JSON.parse(fs.readFileSync('out/receipt-vs-base.json', 'utf8'));
+            if (rec.hash !== m.receipts[0].hash) { console.error('RECEIPT FILE DOES NOT MATCH THE SIGNED MANIFEST'); process.exit(1); }
+            const mf = fs.readFileSync('out/Modelfile', 'utf8').replace(/\r\n/g, '\n');
+            if (k.sha256(mf).hash !== m.modelfileHash) { console.error('MODELFILE DOES NOT MATCH THE SIGNED MANIFEST'); process.exit(1); }
+            console.log('manifest intact + signature valid + receipt and Modelfile match: ' + m.node + ' (' + m.receipts[0].verdict + ')');
+          });"
+      - name: page fixpoint — the live logic IS the gated kernel
+        run: |
+          node make-page.mjs
+          git diff --exit-code index.html

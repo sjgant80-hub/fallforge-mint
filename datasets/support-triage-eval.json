@@ -1,0 +1,22 @@
+{
+  "name": "support-triage-v1",
+  "task": "Read a customer support message. Reply with ONLY a JSON object: {\"category\": one of refund|shipping|account|bug|other, \"urgency\": one of low|medium|high, \"order\": the order number as a string or \"none\"}. No prose.",
+  "probes": [
+    { "id": "t01", "input": "I want my money back for order 4471, the kettle arrived shattered. This is urgent, I needed it for my B&B guests this weekend!!", "expect": { "type": "json-field", "field": "category", "value": "refund" } },
+    { "id": "t02", "input": "I want my money back for order 4471, the kettle arrived shattered. This is urgent, I needed it for my B&B guests this weekend!!", "expect": { "type": "json-field", "field": "urgency", "value": "high" } },
+    { "id": "t03", "input": "I want my money back for order 4471, the kettle arrived shattered. This is urgent, I needed it for my B&B guests this weekend!!", "expect": { "type": "json-field", "field": "order", "value": "4471" } },
+    { "id": "t04", "input": "Hiya, no rush at all — just wondering when order 88012 might ship? Cheers.", "expect": { "type": "json-field", "field": "category", "value": "shipping" } },
+    { "id": "t05", "input": "Hiya, no rush at all — just wondering when order 88012 might ship? Cheers.", "expect": { "type": "json-field", "field": "urgency", "value": "low" } },
+    { "id": "t06", "input": "Hiya, no rush at all — just wondering when order 88012 might ship? Cheers.", "expect": { "type": "json-field", "field": "order", "value": "88012" } },
+    { "id": "t07", "input": "I can't log in to my account since yesterday, password reset emails never arrive. I have a client demo tomorrow morning.", "expect": { "type": "json-field", "field": "category", "value": "account" } },
+    { "id": "t08", "input": "I can't log in to my account since yesterday, password reset emails never arrive. I have a client demo tomorrow morning.", "expect": { "type": "json-field", "field": "order", "value": "none" } },
+    { "id": "t09", "input": "The export button crashes the app every time I press it on the reports page. Not blocking me today but thought you should know.", "expect": { "type": "json-field", "field": "category", "value": "bug" } },
+    { "id": "t10", "input": "The export button crashes the app every time I press it on the reports page. Not blocking me today but thought you should know.", "expect": { "type": "json-field", "field": "urgency", "value": "low" } },
+    { "id": "t11", "input": "URGENT: our whole team is locked out and we are mid-payroll. Order N/A — this is the enterprise account under Wilkins Ltd.", "expect": { "type": "json-field", "field": "urgency", "value": "high" } },
+    { "id": "t12", "input": "URGENT: our whole team is locked out and we are mid-payroll. Order N/A — this is the enterprise account under Wilkins Ltd.", "expect": { "type": "json-field", "field": "category", "value": "account" } },
+    { "id": "t13", "input": "Do you sell gift cards? Asking for my mum's birthday next month.", "expect": { "type": "json-field", "field": "category", "value": "other" } },
+    { "id": "t14", "input": "Package for order 305 says delivered but nothing has arrived. Second time this month — getting quite annoyed now.", "expect": { "type": "json-field", "field": "category", "value": "shipping" } },
+    { "id": "t15", "input": "Package for order 305 says delivered but nothing has arrived. Second time this month — getting quite annoyed now.", "expect": { "type": "json-field", "field": "order", "value": "305" } },
+    { "id": "t16", "input": "Refund please. Order 9. Wrong size.", "expect": { "type": "json-field", "field": "order", "value": "9" } }
+  ]
+}
