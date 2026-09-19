@@ -1,5 +1,12 @@
 # FallForge Mint
 
+> **Superseded, not deleted.** [fallforgemint](https://github.com/sjgant80-hub/fallforgemint)
+> (no hyphen) is the current, converged mint pipeline — a superset of this repo plus
+> [fallforge-gate](https://github.com/sjgant80-hub/fallforge-gate)'s proof-of-play logic in one
+> kernel. This page stays live and gated as a historical record of layer 2 of the original
+> sovereign-node factory; new work happens in fallforgemint and the converging
+> [fallforge](https://github.com/sjgant80-hub/fallforge) hub.
+
 **LIVE: https://sjgant80-hub.github.io/fallforge-mint/**
 
 The sovereign-node minting pipeline — layer 2 of the sovereign-node factory. Point it at a
